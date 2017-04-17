@@ -1,0 +1,90 @@
+#Alias
+alias srczsh='source $ZSH/oh-my-zsh.sh'
+alias srcAlias='source $HOME/.aliases'
+alias toggl='node /Users/kateeldridge/Documents/ConnectWise_TimeSync/bin/cli.js'
+alias tmuxc='sublime /Users/kateeldridge/.tmux.conf'
+alias hosts='sudo sublime /etc/hosts'
+alias opent='open . -a iterm'
+alias subl='sublime'
+alias show_hidden='defaults write com.apple.Finder AppleShowAllFiles YES && killall Finder; echo "Hidden-Files Shown"'
+alias hide_hidden='defaults write com.apple.Finder AppleShowAllFiles NO && killall Finder; echo "Hidden-Files Hidden"'
+alias vu='vagrant up'
+alias vdes='vagrant destroy'
+alias vrel='vagrant reload'
+alias vprov='vagrant provision'
+alias vhalt='vagrant halt'
+alias vssh='vagrant ssh'
+alias vbadd='vagrant box add'
+alias vbls='vagrant box list'
+alias vbrm='vagrant box remove'
+alias vbupd='vagrant box update'
+
+ #GIT
+alias gbn='git branch -m'
+alias gbd='git branch -D'
+alias gfu='git fetch uptsream'
+alias grum='git rebase upstream/master'
+alias gruother='git rebase upstream/'
+alias pushcurrent='git push origin $(current_branch)'
+alias fpushcurrent='git push -f origin $(current_branch)'
+alias resetHard='git reset --hard'
+alias rbi='git rebase -i'
+##shows files changed in commit
+alias pretty='git show --pretty="" --name'
+
+
+#Vagrant
+alias vu='vagrant up'
+alias vdes='vagrant destroy'
+alias vrel='vagrant reload'
+alias vprov='vagrant provision'
+alias vhalt='vagrant halt'
+alias vssh='vagrant ssh'
+alias vbadd='vagrant box add'
+alias vbls='vagrant box list'
+alias vbrm='vagrant box remove'
+alias vbupd='vagrant box update'
+
+#Other CLI commands
+alias clr='clear'
+alias show_hidden='defaults write com.apple.Finder AppleShowAllFiles YES && killall Finder; echo "Hidden-Files Shown"'
+alias hide_hidden='defaults write com.apple.Finder AppleShowAllFiles NO && killall Finder; echo "Hidden-Files Hidden"'
+alias pubip='curl -s http://wtfismyip.com/text'
+
+#ssh
+alias addkey='ssh-add -k .ssh/eldridge.key'
+alias tunnelw='ssh keldridge@10.10.10.61 -p 42585'
+alias tunnelh='ssh keldridge@4.35.87.33 -p 42585'
+alias catssh='cat /etc/ssh/ssh_config | grep'
+#Permissions
+alias chm7='sudo chmod 777'
+
+#server
+alias server='http-server'
+
+#magento
+alias cfpc='rm -rf cache full_page_cache'
+
+
+# -------------------------------------------------------------------
+# FUNCTIONS
+# -------------------------------------------------------------------
+ 
+# return my IP address
+function myip() {
+    ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
+     ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+     ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+     ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+     ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+}
+ 
+# Change directory to the current Finder directory
+cdf() {
+    target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
+    if [ "$target" != "" ]; then
+        cd "$target"; pwd
+    else
+        echo 'No Finder window found' >&2
+    fi
+}
